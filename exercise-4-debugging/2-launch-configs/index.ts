@@ -1,9 +1,9 @@
-const API_BASE = "https://lifx-lamp-api.azurewebsites.net/api";
+const API_BASE = process.env.API_BASE;
 import axios from "axios";
 
 const readline = require("readline").createInterface({
   input: process.stdin,
-  output: process.stdout
+  output: process.stdout,
 });
 
 function setColor(color) {
@@ -12,12 +12,12 @@ function setColor(color) {
     .then(() => {
       console.log(`The lamp color has been changed to: ${color}`);
     })
-    .catch(err => {
+    .catch((err) => {
       console.log(err.message);
     });
 }
 
-readline.question("Enter a color: ", async color => {
+readline.question("Enter a color: ", async (color) => {
   await setColor(color);
   readline.close();
 });
